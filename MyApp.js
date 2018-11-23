@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, FlatList} from 'react-native';
+import {connect} from 'react-redux'
 
 
 //					<Button title='options' style={styles.Button}/>
@@ -7,10 +8,19 @@ import { StyleSheet, Text, View, Button, TextInput, FlatList} from 'react-native
 class MyApp extends Component{
 
 
-
-
+	openAddNote = () => {
+		this.props.openAddNotes();
+	}
 
 	render = () =>  {
+
+
+
+		if(this.props.addNotes){
+
+			alert('hola')
+
+		}
 
 
 		return(
@@ -19,16 +29,12 @@ class MyApp extends Component{
 				
 					<TextInput placeholder='search notes' style={styles.TextInput}/>
 
+
 				<View style={styles.button}>
 
-					<Button title='add a note'/>
+					<Button title='add a note' onPress = {this.openAddNote}/>
 
 				</View>
-
-
-
-
-
 				</View>
 			</View>
 		);
@@ -66,5 +72,22 @@ const styles = StyleSheet.create({
 
 });
 
+const mapStateToProps = (state) => {
 
-export default MyApp;
+      return {
+              addNotes:state.notes.addNotes,
+             // content:state.notes.content,
+              //userInput: state.notes.userInput
+            };
+
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openAddNotes: () => dispatch(openAddNotes()),
+    closeAddNotes: () => dispatch(closeAddNotes()),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(MyApp);
+
