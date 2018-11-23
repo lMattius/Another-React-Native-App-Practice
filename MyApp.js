@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList} from 'react-native';
+
 
 //					<Button title='options' style={styles.Button}/>
 
@@ -23,6 +24,8 @@ class MyApp extends Component{
 					<Button title='add a note'/>
 
 				</View>
+
+
 
 
 
