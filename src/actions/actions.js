@@ -1,10 +1,10 @@
 import {OPEN_ADD_NOTES,
 		CLOSE_ADD_NOTES} from './actionTypes';
 
-export const openAddNotes = () => ({
-	type: OPEN_ADD_NOTES,
-})
+export const openAddMenu = () => {
+	return{type: OPEN_ADD_NOTES,};
+};
 
-export const closeAddNotes = () => ({
-	type: CLOSE_ADD_NOTES,
-})
+export const closeAddMenu = () => {
+	return {type: CLOSE_ADD_NOTES,};
+};

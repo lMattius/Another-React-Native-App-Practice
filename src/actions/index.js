@@ -1,1 +1,1 @@
-export {openAddNotes, closeAddNotes} from './actions';
+export {closeAddMenu, openAddMenu} from './actions';

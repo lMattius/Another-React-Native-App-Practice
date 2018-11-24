@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, FlatList} from 'react-native';
 import {connect} from 'react-redux'
-
+import {closeAddMenu, openAddMenu} from './src/actions/actions';
 
 //					<Button title='options' style={styles.Button}/>
 
@@ -9,18 +9,22 @@ class MyApp extends Component{
 
 
 	openAddNote = () => {
-		this.props.openAddNotes();
+
+		if(this.props.addNotes){
+			
+		 this.props.closeAddMenu();
+
+		}else{
+
+		 this.props.openAddMenu();
+
+		}
+
 	}
 
 	render = () =>  {
 
 
-
-		if(this.props.addNotes){
-
-			alert('hola')
-
-		}
 
 
 		return(
@@ -84,8 +88,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    openAddNotes: () => dispatch(openAddNotes()),
-    closeAddNotes: () => dispatch(closeAddNotes()),
+    openAddMenu: () => dispatch(openAddMenu()),
+    closeAddMenu: () => dispatch(closeAddMenu()),
   };
 };
 
