@@ -1,15 +1,30 @@
 import React,{Component} from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList} from 'react-native';
+import {connect} from 'react-redux'
+import {closeAddMenu, openAddMenu} from './src/actions/actions';
 
 //					<Button title='options' style={styles.Button}/>
 
 class MyApp extends Component{
 
 
+	openAddNote = () => {
 
+		if(this.props.addNotes){
+			
+		 this.props.closeAddMenu();
 
+		}else{
+
+		 this.props.openAddMenu();
+
+		}
+
+	}
 
 	render = () =>  {
+
+
 
 
 		return(
@@ -18,14 +33,12 @@ class MyApp extends Component{
 				
 					<TextInput placeholder='search notes' style={styles.TextInput}/>
 
+
 				<View style={styles.button}>
 
-					<Button title='add a note'/>
+					<Button title='add a note' onPress = {this.openAddNote}/>
 
 				</View>
-
-
-
 				</View>
 			</View>
 		);
@@ -63,5 +76,22 @@ const styles = StyleSheet.create({
 
 });
 
+const mapStateToProps = (state) => {
 
-export default MyApp;
+      return {
+              addNotes:state.notes.addNotes,
+             // content:state.notes.content,
+              //userInput: state.notes.userInput
+            };
+
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openAddMenu: () => dispatch(openAddMenu()),
+    closeAddMenu: () => dispatch(closeAddMenu()),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(MyApp);
+

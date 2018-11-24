@@ -1,0 +1,2 @@
+export const OPEN_ADD_NOTES = 'OPEN_ADD_NOTES';
+export const CLOSE_ADD_NOTES = 'CLOSE_ADD_NOTES';
