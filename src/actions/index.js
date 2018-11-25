@@ -5,4 +5,5 @@ export {closeAddMenu,
 		 updateNote,
 		 eraseNote,
 		 openNote,
-		 cleanSelectedNote,} from './actions';
+		 cleanSelectedNote,
+		 updateUserDescription,} from './actions';

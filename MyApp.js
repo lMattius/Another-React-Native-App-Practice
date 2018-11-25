@@ -8,7 +8,8 @@ import {closeAddMenu,
 	updateNote,
 	eraseNote,
 	openNote,
-	cleanSelectedNote} from './src/actions/index';
+	cleanSelectedNote,
+	updateUserDescription,} from './src/actions/index';
 import ShowNotes from './src/components/ShowNotes';
 import Notes from './src/components/Notes';
 
@@ -39,7 +40,7 @@ class MyApp extends Component{
 		/*Adds a new note to content and names it 'No Title' before the user
 		changes the title*/
 
-		this.props.newNotes('No Title');
+		this.props.newNotes({title:'No Title', description: ''});
 
 	}
 
@@ -51,15 +52,23 @@ class MyApp extends Component{
 
 	}
 
+	onChangeDescription = (text) => {
+
+
+		this.props.updateUserDescriptions(text);
+
+	}
+
 	updateNote = (index) => {
 
 		/*Changes the title of the note after it gets opened*/
 
-		note = { key:index, title: this.props.userInput};
+		note = { key:index, title: this.props.userInput, description: this.props.userDescription};
 
 		this.props.updateNotes(note);
 
 		this.props.updateUserInput("");
+		this.props.updateUserDescriptions("");
 
 	}
 
@@ -78,6 +87,8 @@ class MyApp extends Component{
 	onCloseSelected = () => {
 
 		/*Closes a selected note*/
+
+		//this.updateNote(index);
 
 		this.props.deselectNote();
 
@@ -128,8 +139,10 @@ class MyApp extends Component{
 			showNewNote = <Notes 
 						onClose = {this.onClose.bind(this, this.props.content[this.props.content.length-1].key )}
 						title = {this.props.userInput}
+						description = {this.props.userDescription}
 						key = {this.props.content[this.props.content.length-1].key}
 						onChangeText = {this.onChangeText}
+						onChangeDescription = {this.onChangeDescription}
 						onPress = {this.onEraseNote.bind(this,this.props.content[this.props.content.length-1].key)}/>
 		}
 
@@ -139,8 +152,10 @@ class MyApp extends Component{
 			showNewNote = <Notes 
 						onClose = {this.onCloseSelected.bind(this, this.props.selected.key)}
 						title = {this.props.selected.title}
+						description = {this.props.selected.description}
 						key = {this.props.selected.key}
 						onChangeText = {this.onChangeText}
+						onChangeDescription = {this.onChangeDescription}
 						onPress = {this.onEraseNoteSelected.bind(this,this.props.selected.key)}/>
 
 		}
@@ -185,8 +200,10 @@ class MyApp extends Component{
 						<ShowNotes
 						key = {item.item.key}
 						title={item.item.title}
+						description = {item.item.description}
 						onPress = {this.onOpenNote.bind(this,{key: item.item.key,
-													title: item.item.title})}/>
+															title: item.item.title,
+															description: item.item.description})}/>
 						)}/>
 
 				</View>
@@ -235,6 +252,7 @@ const mapStateToProps = (state) => {
               addNotes:state.notes.addNotes,
               content:state.notes.content,
               userInput: state.notes.userInput,
+              userDescription: state.notes.userDescription,
               selected: state.notes.selectedNote,
             };
 
@@ -246,6 +264,7 @@ const mapDispatchToProps = dispatch => {
     closeAddMenu: () => dispatch(closeAddMenu()),
     newNotes: (title) => dispatch(newNotes(title)),
     updateUserInput: (value) => dispatch(updateUserInput(value)),
+    updateUserDescriptions: (text) => dispatch(updateUserDescription(text)),
     updateNotes: (note) => dispatch(updateNote(note)),
     eraseNotes: (index) => dispatch(eraseNote(index)),
     openNotes: (note) => dispatch(openNote(note)),

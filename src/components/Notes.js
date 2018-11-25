@@ -19,7 +19,7 @@ const Notes = (props) =>
 
 				<View style = {styles.content}>
 
-					<TextInput style={styles.inputbody} multiline = {true}/>
+					<TextInput style={styles.inputbody} multiline = {true} value = {props.description} onChangeText = {props.onChangeDescription}/>
 
 				</View>
 

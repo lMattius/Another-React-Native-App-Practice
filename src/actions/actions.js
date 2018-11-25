@@ -5,7 +5,8 @@ import {OPEN_ADD_NOTES,
 		NOTE_UPDATE,
 		ERASE_NOTE,
 		CONTENT_OPEN,
-		CLEAN_SELECTED,} from './actionTypes';
+		CLEAN_SELECTED,
+		USER_DESCRIPTION_UPDATE} from './actionTypes';
 
 export const openAddMenu = () => {
 	return{type: OPEN_ADD_NOTES,};
@@ -15,9 +16,10 @@ export const closeAddMenu = () => {
 	return {type: CLOSE_ADD_NOTES,};
 };
 
-export const newNotes = (title) => {
+export const newNotes = (note) => {
 	return {type: NEW_NOTE,
-			value:title};
+			value:note.title,
+			description:note.description};
 };
 
 export const updateUserInput = (value) => {
@@ -25,10 +27,18 @@ export const updateUserInput = (value) => {
 			value};
 };
 
+export const updateUserDescription = (value) => {
+
+	return {type: USER_DESCRIPTION_UPDATE,
+			value};
+
+};
+
 export const updateNote = (note) => {
 	return {type: NOTE_UPDATE,
 			key: note.key,
-			title: note.title };
+			title: note.title,
+			description: note.description};
 };
 
 export const eraseNote = (key) => {

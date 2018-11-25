@@ -3,6 +3,7 @@ const initialState = {
 	addNotes: false,
 	content: [],
 	userInput : "",
+	userDescription: "",
 	selectedNote: null,
 };
 
@@ -26,12 +27,19 @@ const reducer = (state = initialState, action) => {
 						userInput: action.value
 						};
 
+			case 'USER_DESCRIPTION_UPDATE':
+
+				return{...state,
+						userDescription: action.value
+						};
+
 			case 'NEW_NOTE':
 
 				return{...state,
 						content:[...state.content,{
 							key: Math.random(),
 							title:action.value,
+							description: action.description,
 							}]
 						};
 
@@ -39,17 +47,46 @@ const reducer = (state = initialState, action) => {
 
 				if(action.title.trim() !== ""){
 
-				return {...state,
-							content: state.content.map(note => (note.key === action.key ? {key:action.key, title: action.title} : note)),
-						};
+						if(action.description.trim() !== ""){
+
+							return {...state,
+										content: state.content.map(note => (note.key === action.key ? {key:action.key, 
+																									title: action.title, 
+																									description: action.description} : note)),
+									};
+
+						}else{
+
+							return {...state,
+									content: state.content.map(note => (note.key === action.key ? {key:action.key, 
+																							  		title: action.title,
+																							 		description:'No description'} : note)),
+							};
+
+						} //closing title conditions
 
 				}else{
 
-				return {...state,
-							content: state.content.map(note => (note.key === action.key ? {key:action.key, title: 'No Title'} : note)),
-						};
+						if(action.description.trim() !== ""){
 
-				}
+							return {...state,
+										content: state.content.map(note => (note.key === action.key ? {key:action.key, 
+																									  title: 'No Title',
+																									 description:action.description} : note)),
+									};
+
+						}else{
+
+
+							return {...state,
+										content: state.content.map(note => (note.key === action.key ? {key:action.key, 
+																									  title: 'No Title',
+																									 description:'No description'} : note)),
+									};
+
+						}
+
+				} //closing if statement
 
 			case 'ERASE_NOTE':
 
