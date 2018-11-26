@@ -2,27 +2,46 @@ import React,{Component} from 'react';
 import { StyleSheet, Text, View, Button, TextInput, FlatList, Modal} from 'react-native';
 import HeaderButtons from './HeaderButtons'
 
-const Notes = (props) => (<Modal onRequestClose = {props.onClose}>
+class NotesMod extends Component{ 
+
+	constructor(props){
+
+		super(props);
+
+
+	}
+
+	componentDidMount(){
+
+		this.props.onChangeText(this.props.title);
+		this.props.onChangeDescription(this.props.description)
+	}
+
+		render(){
+
+
+			return(<Modal onRequestClose = {this.props.onClose}>
 
 				<View style = {styles.header}> 
 
 					<TextInput placeholder = "title"
 					 style = {styles.inputheader}
-					  value={props.title}
-					  onChangeText = {props.onChangeText}/>
+					  value={this.props.titleScanner}
+					  onChangeText = {this.props.onChangeText}/>
 
-					<HeaderButtons onPress = {props.onPress} />
+					<HeaderButtons onPress = {this.props.onPress} />
 
 				</View>
 
 				<View style = {styles.content}>
 
-					<TextInput style={styles.inputbody} multiline = {true} value = {props.description} onChangeText = {props.onChangeDescription}/>
+					<TextInput style={styles.inputbody} multiline = {true} value = {this.props.descriptionScanner} onChangeText = {this.props.onChangeDescription}/>
 
 				</View>
 
 			</Modal>);
-
+	}
+}
 
 const styles = StyleSheet.create({
 	header:{
@@ -54,6 +73,6 @@ const styles = StyleSheet.create({
   	}
 })
 
-export default Notes;
+export default NotesMod;
 
 

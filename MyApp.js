@@ -12,6 +12,7 @@ import {closeAddMenu,
 	updateUserDescription,} from './src/actions/index';
 import ShowNotes from './src/components/ShowNotes';
 import Notes from './src/components/Notes';
+import NotesMod from './src/components/NotesMod';
 
 class MyApp extends Component{
 
@@ -40,6 +41,10 @@ class MyApp extends Component{
 		/*Adds a new note to content and names it 'No Title' before the user
 		changes the title*/
 
+		this.props.updateUserInput("");
+		
+		this.props.updateUserDescriptions("");
+
 		this.props.newNotes({title:'No Title', description: ''});
 
 	}
@@ -53,6 +58,8 @@ class MyApp extends Component{
 	}
 
 	onChangeDescription = (text) => {
+
+		/*Parses the desciption the user enters */
 
 
 		this.props.updateUserDescriptions(text);
@@ -68,6 +75,7 @@ class MyApp extends Component{
 		this.props.updateNotes(note);
 
 		this.props.updateUserInput("");
+
 		this.props.updateUserDescriptions("");
 
 	}
@@ -84,11 +92,11 @@ class MyApp extends Component{
 
 	}
 
-	onCloseSelected = () => {
+	onCloseSelected = (index) => {
 
 		/*Closes a selected note*/
 
-		//this.updateNote(index);
+		this.updateNote(index);
 
 		this.props.deselectNote();
 
@@ -115,6 +123,10 @@ class MyApp extends Component{
 
 		this.props.deselectNote();
 
+		this.props.updateUserInput("");
+
+		this.props.updateUserDescriptions("");
+
 	}
 
 	onOpenNote = (note) => {
@@ -125,7 +137,6 @@ class MyApp extends Component{
 
 
 	}
-	
 
 					
 
@@ -136,30 +147,34 @@ class MyApp extends Component{
 
 		if(this.props.addNotes){
 
-			showNewNote = <Notes 
+			showNewNote = <Notes
 						onClose = {this.onClose.bind(this, this.props.content[this.props.content.length-1].key )}
 						title = {this.props.userInput}
 						description = {this.props.userDescription}
 						key = {this.props.content[this.props.content.length-1].key}
 						onChangeText = {this.onChangeText}
 						onChangeDescription = {this.onChangeDescription}
-						onPress = {this.onEraseNote.bind(this,this.props.content[this.props.content.length-1].key)}/>
+						onPress = {this.onEraseNote.bind(this,this.props.content[this.props.content.length-1].key)}
+						/>
 		}
 
 		if(this.props.selected){
 
 
-			showNewNote = <Notes 
+
+			showNewNote = <NotesMod
 						onClose = {this.onCloseSelected.bind(this, this.props.selected.key)}
 						title = {this.props.selected.title}
+						titleScanner = {this.props.userInput}
 						description = {this.props.selected.description}
+						descriptionScanner = {this.props.userDescription}
 						key = {this.props.selected.key}
 						onChangeText = {this.onChangeText}
 						onChangeDescription = {this.onChangeDescription}
-						onPress = {this.onEraseNoteSelected.bind(this,this.props.selected.key)}/>
+						onPress = {this.onEraseNoteSelected.bind(this,this.props.selected.key)}
+						/>
 
 		}
-
 
 
 		filteredNotes = this.props.content.filter(content => (
