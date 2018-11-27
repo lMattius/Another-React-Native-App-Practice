@@ -11,7 +11,7 @@ class NotesMod extends Component{
 
 	}
 
-	componentDidMount(){
+	componentWillMount(){
 
 		this.props.onChangeText(this.props.title);
 		this.props.onChangeDescription(this.props.description)
