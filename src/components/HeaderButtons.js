@@ -1,9 +1,7 @@
 import React from 'react';
-import {View, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, Button, StyleSheet} from 'react-native';
 
 //styles = {styles.savebutton}
-//<Button title = "erase" color = "red" onPress = {props.onPress}/>
 
 const HeaderButtons = (props) => (
 
@@ -11,19 +9,13 @@ const HeaderButtons = (props) => (
 
 		<View style = {styles.savebutton}>
 
-			<Button title = "save"/>
+			<Button title = "save" />
 
 		</View>
 
 		<View styles = {styles.erasebutton}>
 
-			<TouchableOpacity onPress = {props.onPress}> 
-
-				<Icon size = {30} name = "ios-trash" color = "red" />
-
-			</TouchableOpacity>
-
-
+			<Button title = "erase" color = "red" onPress = {props.onPress}/>
 
 		</View>
 

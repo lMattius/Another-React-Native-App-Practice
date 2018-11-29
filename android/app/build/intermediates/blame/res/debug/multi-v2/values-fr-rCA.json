@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\lMatt\\Documents\\javascript\\react\\reactNative\\actualProject\\iNotes\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
+            "outputFile": "C:\\Users\\lMatt\\Documents\\javascript\\react\\reactNative\\iNotes\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lMatt\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\23bd8a8d6a08bf11e20cc6bb0f6519ae\\res\\values-fr-rCA\\values-fr-rCA.xml",
